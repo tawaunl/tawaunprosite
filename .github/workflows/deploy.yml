@@ -1,0 +1,66 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Rebuild weekly so the CV stays in sync with tawaunl/ResumeCV.
+  schedule:
+    - cron: "0 14 * * 1"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      # Pull the latest CV from the private ResumeCV repo when a token is
+      # configured (repo secret RESUME_CV_TOKEN, read access to contents).
+      # Without it, the committed static/cv/TawaunLucas_CV.pdf is published.
+      - name: Fetch latest CV
+        env:
+          RESUME_CV_TOKEN: ${{ secrets.RESUME_CV_TOKEN }}
+        run: |
+          if [ -z "$RESUME_CV_TOKEN" ]; then
+            echo "::notice::RESUME_CV_TOKEN not set; publishing committed CV"
+            exit 0
+          fi
+          tmp="$(mktemp)"
+          curl -fsSL --retry 3 \
+            -H "Authorization: Bearer $RESUME_CV_TOKEN" \
+            -H "Accept: application/vnd.github.raw" \
+            -o "$tmp" \
+            "https://api.github.com/repos/tawaunl/ResumeCV/contents/FullResume.pdf?ref=main"
+          if [ "$(head -c 5 "$tmp")" = "%PDF-" ] && tail -c 1024 "$tmp" | grep -q '%%EOF'; then
+            cp "$tmp" static/cv/TawaunLucas_CV.pdf
+            echo "Fetched CV ($(wc -c < "$tmp") bytes)"
+          else
+            echo "::warning::Downloaded CV did not look like a complete PDF; keeping committed copy"
+          fi
+
+      - name: Build
+        env:
+          # "/" with a custom domain, "/tawaunprosite/" on github.io
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: python3 build.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

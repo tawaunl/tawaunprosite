@@ -1,0 +1,74 @@
+{
+  "work": [
+    {
+      "title": "Senior Scientist, Translational Data Science",
+      "org": "Calico Life Sciences",
+      "dates": "June 2026 - Present",
+      "summary": "I lead single-cell meta-analyses of glial stress across 20+ Parkinson’s, multiple sclerosis, and Alzheimer’s cohorts, profiling the astrocyte integrated stress response. This work nominated a patient subgroup carrying almost all of the disease-associated chromatin signal, which helped reframe the target question as “which patients?” I identified a glial stress biomarker for wet-lab validation and showed that the human signature replicates in an in-vitro astrocyte model. I also wrote a four-gate go/no-go framework for evaluating a Parkinson’s therapeutic target, presented findings to program teams and leadership, and built a team tool that runs analysis pipelines on Google Cloud via Cloud Batch and Nextflow."
+    },
+    {
+      "title": "Senior Computational Biologist – Spatial/Single-Cell Omics",
+      "org": "LatchBio",
+      "dates": "March 2026 - June 2026",
+      "summary": "I conducted targeted spatial and single-cell transcriptomics analyses with defined ground truths and known failure modes, enabling rigorous evaluation of AI agent outputs against bioinformatic standards. I designed and implemented reinforcement learning environments, including reward design and task simulators, to train analysis agents, and built evaluation harnesses to benchmark agent robustness, generalization, and reliability across sequencing- and image-based spatial workflows."
+    },
+    {
+      "title": "Senior Computational Biologist",
+      "org": "Biohub (Chan Zuckerberg Initiative)",
+      "dates": "November 2025 - March 2026",
+      "summary": "As a Senior Computational Biologist, I worked at the intersection of biology research and AI/ML model development to build scientific products and scalable computational workflows for biomedical research. I led development of AI Workspace, a no-code platform that streamlines scRNA-seq analysis through automated workflows, integrated AI models, hosted compute, and interactive interfaces. I partnered with scientists, engineers, product teams, and external collaborators, and designed benchmarking and evaluation studies for foundation models and analysis workflows to ensure our products were scientifically valid and usable."
+    },
+    {
+      "title": "Computational Biologist (Contract) - OMNI TM",
+      "org": "Genentech, Inc.",
+      "dates": "August 2025 - January 2026",
+      "summary": "As a Computational Biologist on the OMNI Bioinformatics team, I worked within cross-functional teams to support discovery of immunology targets and development of therapeutics for Inflammatory Bowel Disease (IBD). I developed computational frameworks for the integration and analysis of multimodal data (molecular, cellular, clinical, and imaging) to enhance decision-making across the research and development pipeline, using single-cell and spatial transcriptomics, histology, and foundation models for target prioritization and biomarker discovery. As a result, I brought forward two targets for prioritization and created workstreams that reduced dataset analysis time by approximately 10%."
+    },
+    {
+      "title": "Postdoctoral Fellow",
+      "org": "Genentech, Inc.",
+      "dates": "April 2021 - August 2025",
+      "summary": "As a postdoctoral researcher, my focus was on computational biology, particularly examining the diverse functions of reactive astrocytes in neurodegeneration. I created a large-scale single-cell transcriptomic atlas of human and mouse astrocytes across neurodegenerative diseases, led the development of analysis pipelines for spatial transcriptomics (10x Visium, 10x Xenium), and built frameworks unifying multi-omics sequencing with CRISPR and ATAC (Perturb-seq, CITE-seq, 10x Multiome). I mentored 3 junior researchers, 1 research associate, and 2 interns."
+    },
+    {
+      "title": "Graduate Researcher",
+      "org": "Stanford University - School of Medicine",
+      "dates": "August 2014 – February 2021",
+      "summary": "As a graduate student, I worked on several projects focused on molecular biology and transcriptomics. One project examined glial cells in the spleen and their role in neuroimmune communication during CNS injury. I designed experiments, built RNA-seq workflows in Snakemake, developed Shiny apps for data visualization, analyzed data, and presented the findings at scientific conferences."
+    },
+    {
+      "title": "Summer Research Intern",
+      "org": "Stanford Summer Research Program (SSRP)",
+      "dates": "June 2013 – August 2013",
+      "summary": "During my internship, I gained practical experience in data science and neurology. I explored GABA’s role in decision-making, created MATLAB tasks, and conducted fMRI scans. This experience laid a strong foundation for my career in neurobiology and computational science."
+    }
+  ],
+  "education": [
+    {
+      "title": "Ph.D. Neurosciences",
+      "org": "Stanford University School of Medicine",
+      "dates": "September 2014 – May 2021",
+      "lines": ["Thesis on the diversity of glia in our nervous system."],
+      "supervisor": { "name": "Marion Buckwalter", "url": "https://med.stanford.edu/profiles/marion-buckwalter" },
+      "thesis": "docs/Lucas_Dissertation_2021.pdf"
+    },
+    {
+      "title": "Bachelor's Psychology (Honor's)",
+      "org": "California State University Northridge",
+      "dates": "August 2009 – May 2014",
+      "lines": ["Student-Athlete (Track and Field)", "GPA: 3.8/4.0"]
+    }
+  ],
+  "skills": {
+    "Programming Skills": [
+      { "name": "R", "img": "img/skills/R_logo.png", "width": 100, "level": 1.0, "show_name": false },
+      { "name": "Unix / Linux", "img": "img/skills/unix.png", "width": 60, "level": 0.9, "show_name": false },
+      { "name": "Python", "img": "img/skills/python_logo_new.png", "width": 70, "level": 0.8, "show_name": false }
+    ],
+    "Technical Skills": [
+      { "name": "Cell and Molecular Approaches, including spatial", "img": "img/skills/pipette.svg", "width": 80, "level": 0.9, "show_name": true },
+      { "name": "Microscopy", "img": "img/skills/microscope-icon.png", "width": 70, "level": 0.9, "show_name": true },
+      { "name": "Machine Learning and AI/Statistics", "img": "img/skills/stats.svg", "width": 70, "level": 0.6, "show_name": true }
+    ]
+  }
+}
