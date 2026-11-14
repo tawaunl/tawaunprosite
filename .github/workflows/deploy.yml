@@ -26,15 +26,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - id: pages
+        uses: actions/configure-pages@v5
+
       # Pull the latest CV from the private ResumeCV repo when a token is
       # configured (repo secret RESUME_CV_TOKEN, read access to contents).
-      # Without it, the copy committed in cv/ is published as-is.
+      # Without it, the committed static/cv/TawaunLucas_CV.pdf is published.
       - name: Fetch latest CV
         env:
           RESUME_CV_TOKEN: ${{ secrets.RESUME_CV_TOKEN }}
         run: |
           if [ -z "$RESUME_CV_TOKEN" ]; then
-            echo "::notice::RESUME_CV_TOKEN not set; publishing committed cv/TawaunLucas_CV.pdf"
+            echo "::notice::RESUME_CV_TOKEN not set; publishing committed CV"
             exit 0
           fi
           tmp="$(mktemp)"
@@ -44,19 +47,18 @@ jobs:
             -o "$tmp" \
             "https://api.github.com/repos/tawaunl/ResumeCV/contents/FullResume.pdf?ref=main"
           if [ "$(head -c 5 "$tmp")" = "%PDF-" ] && tail -c 1024 "$tmp" | grep -q '%%EOF'; then
-            cp "$tmp" cv/TawaunLucas_CV.pdf
+            cp "$tmp" static/cv/TawaunLucas_CV.pdf
             echo "Fetched CV ($(wc -c < "$tmp") bytes)"
           else
             echo "::warning::Downloaded CV did not look like a complete PDF; keeping committed copy"
           fi
 
-      - name: Assemble site
-        run: |
-          mkdir -p _site
-          cp -r index.html 404.html .nojekyll assets cv _site/
-          [ -f CNAME ] && cp CNAME _site/ || true
+      - name: Build
+        env:
+          # "/" with a custom domain, "/tawaunprosite/" on github.io
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: python3 build.py
 
-      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
